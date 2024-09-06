@@ -28,9 +28,7 @@ in
                     ./options.nix
                     ./keymaps.nix
                     ./file-types.nix
-
                     ./colorschemes/catppuccin.nix
-
                     ./plugins/cmp.nix
                     ./plugins/colorizer.nix
                     ./plugins/comment.nix
@@ -41,6 +39,7 @@ in
                     ./plugins/gitsigns.nix
                     ./plugins/harpoon.nix
                     ./plugins/illuminate.nix
+                    ./plugins/indent-blankline.nix
                     ./plugins/leap.nix
                     ./plugins/lightbulb.nix
                     ./plugins/lsp.nix
@@ -76,6 +75,8 @@ in
         config.devshells.default = {
             packages = [nvim];
         };
+
+        config.packages.nvim = nvim;
     }
   );
 }

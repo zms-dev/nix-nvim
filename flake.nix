@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    systems.url = "github:nix-systems/default";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
@@ -20,18 +22,37 @@
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ self, nixpkgs, flake-parts, nix-github-actions, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
         { flake-parts-lib, ... }:
         let
             inherit (flake-parts-lib) importApply;
-        in
-        {
-            systems = [];
 
-            flake.flakeModule = importApply ./flake-module.nix {
+            flakeModules.default = importApply ./flake-module.nix {
                 inherit flake-parts-lib;
                 inherit (inputs) nixpkgs nixvim;
+            };
+        in
+        {
+            imports = [
+                flakeModules.default
+                inputs.devshell.flakeModule
+            ];
+
+            systems = import inputs.systems;
+
+            perSystem = { pkgs, config, ... }: {
+                nvim.enableRust = true;
+                formatter = pkgs.alejandra;
+                devshells.default.packages = [pkgs.alejandra];
+            };
+
+            flake = {
+                inherit flakeModules;
+
+                githubActions = nix-github-actions.lib.mkGithubMatrix {
+                    checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.packages;
+                };
             };
         }
     );
