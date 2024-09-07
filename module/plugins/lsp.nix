@@ -37,6 +37,14 @@
             nil-ls = {
                 enable = true;
             };
+
+            jsonls = {
+                enable = true;
+            };
+
+            yamlls = {
+                enable = true;
+            };
         };
         keymaps.diagnostic = {
             "<leader>j" = "goto_next";

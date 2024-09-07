@@ -9,7 +9,7 @@
                 gitsigns = true;
                 mini = {
                     enabled = true;
-                    indentscope_color = "";
+                    # indentscope_color = "";
                 };
                 treesitter = true;
                 treesitter_context = true;

@@ -28,7 +28,7 @@
         let
             inherit (flake-parts-lib) importApply;
 
-            flakeModules.default = importApply ./flake-module.nix {
+            flakeModules.default = importApply ./module {
                 inherit flake-parts-lib;
                 inherit (inputs) nixpkgs nixvim;
             };
@@ -43,6 +43,8 @@
 
             perSystem = { pkgs, config, ... }: {
                 nvim.enableRust = true;
+                nvim.enableTypeScript = true;
+                nvim.extraConfig = {};
                 formatter = pkgs.alejandra;
                 devshells.default.packages = [pkgs.alejandra];
             };
@@ -51,7 +53,7 @@
                 inherit flakeModules;
 
                 githubActions = nix-github-actions.lib.mkGithubMatrix {
-                    checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.packages;
+                    checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks;
                 };
             };
         }

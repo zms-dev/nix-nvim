@@ -7,7 +7,8 @@
             splitjoin = {};
             pairs = {};
             indentscope = {
-                symbol = "▎";
+                symbol = "│";
+                options = {try_as_border = true;};
             };
         };
     };
