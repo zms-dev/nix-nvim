@@ -16,7 +16,7 @@ in
 }:
 {
   options.perSystem = mkPerSystemOption (
-    { system, config, pkgs, ... }:
+    { self, system, config, pkgs, ... }:
     let
         cfg = config.nvim;
         nixvimLib = nixvim.lib.${system};
@@ -28,20 +28,7 @@ in
                 cfg = cfg;
             };
 
-            module = {
-                # plugins.nix = true;
-
-                imports = [
-                    ./globals.nix
-                    ./options.nix
-                    ./keymaps.nix
-                    ./file-types.nix
-                    ./editorconfig.nix
-                    ./performance.nix
-                    ./colorschemes
-                    ./plugins
-                ];
-            } // cfg.extraConfig;
+            module = import ./nixvim.nix;
         };
         nvim = nixvim'.makeNixvimWithModule nvimModule;
     in
@@ -63,10 +50,6 @@ in
                 pkgs.statix
             ];
         };
-
-        config.packages.nvim = nvim;
-
-        config.checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nvimModule;
     }
   );
 }

@@ -22,7 +22,7 @@
   };
 
   outputs =
-    inputs@{ self, nixpkgs, flake-parts, nix-github-actions, ... }:
+    inputs@{ self, nixpkgs, flake-parts, nixvim, nix-github-actions, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
         { flake-parts-lib, ... }:
         let
@@ -41,13 +41,31 @@
 
             systems = import inputs.systems;
 
-            perSystem = { pkgs, config, ... }: {
-                nvim.enableRust = true;
-                nvim.enableTypeScript = true;
-                nvim.extraConfig = {};
-                formatter = pkgs.alejandra;
-                devshells.default.packages = [pkgs.alejandra];
-            };
+            perSystem = { system, pkgs, config, ... }:
+                let
+                    nixvimLib = nixvim.lib.${system};
+                    nixvim' = nixvim.legacyPackages.${system};
+                    nvimConfig = {
+                        enableRust = true;
+                        enableTypeScript = true;
+                        extraConfig = {};
+                    };
+                    nvimModule = {
+                        inherit pkgs;
+
+                        extraSpecialArgs = {
+                            cfg = nvimConfig;
+                        };
+
+                        module = import ./module/nixvim.nix;
+                    };
+                in
+                {
+                    nvim = nvimConfig;
+                    formatter = pkgs.alejandra;
+                    checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nvimModule;
+                    packages.default = nixvim'.makeNixvimWithModule nvimModule;
+                };
 
             flake = {
                 inherit flakeModules;
