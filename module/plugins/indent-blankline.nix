@@ -18,6 +18,10 @@
                 "lspinfo"
                 "TelescopePrompt"
                 "TelescopeResults"
+                "alpha"
+                "Starter"
+                "starter"
+                "neo-tree"
             ];
         };
     };

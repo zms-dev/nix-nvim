@@ -19,13 +19,12 @@ in
     { self, system, config, pkgs, ... }:
     let
         cfg = config.nvim;
-        nixvimLib = nixvim.lib.${system};
         nixvim' = nixvim.legacyPackages.${system};
         nvimModule = {
             inherit pkgs;
 
             extraSpecialArgs = {
-                cfg = cfg;
+                inherit cfg;
             };
 
             module = import ./nixvim.nix;
@@ -33,21 +32,43 @@ in
         nvim = nixvim'.makeNixvimWithModule nvimModule;
     in
     {
-        options.nvim.enableRust = mkEnableOption "enable Rust plugins";
-        options.nvim.enableTypeScript = mkEnableOption "enable TypeScript plugins";
+        options = {
+            nvim = {
+                enableRust = mkEnableOption "enable Rust plugins";
+                enableTypeScript = mkEnableOption "enable TypeScript plugins";
 
-        options.nvim.extraConfig = mkOption {
-            default = {};
-            type = types.attrs;
-            description = "Extra configuration for nixvim";
+                extraConfig = mkOption {
+                    default = {};
+                    type = types.attrs;
+                    description = "Extra configuration for nixvim";
+                };
+            };
         };
 
         config.devshells.default = {
+            motd = ''
+                {202}🔨 Welcome to devshell{reset}
+                $(type -p menu &>/dev/null && menu)
+            '';
+
             packages = [
                 nvim
                 pkgs.codespell
                 pkgs.alejandra
                 pkgs.statix
+            ];
+
+            commands = [
+                {
+                    name = "nvim";
+                    package = nvim;
+                    help = "start neovim";
+                    category = "editor";
+                }
+                {
+                    package = pkgs.alejandra;
+                    category = "formatter";
+                }
             ];
         };
     }

@@ -1,5 +1,8 @@
 { cfg, ... }: {
     imports = [
+        ./alpha.nix
+        ./barbar.nix
+        ./barbecue.nix
         ./cmp.nix
         ./colorizer.nix
         ./comment.nix
@@ -22,6 +25,7 @@
         ./neotree.nix
         ./noice.nix
         ./none-ls.nix
+        ./no-neck-pain.nix
         ./notify.nix
         ./persistence.nix
         ./project.nix
@@ -40,6 +44,7 @@
     ] ++ (if cfg.enableRust then [
         ./crates.nix
         ./rust-tools.nix
+        ./rustacean.nix
     ] else []) ++ (if cfg.enableTypeScript then [
         ./typescript-tools.nix
     ] else []);

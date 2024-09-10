@@ -3,6 +3,7 @@
         enable = true;
         autoCleanAfterSessionRestore = true;
         closeIfLastWindow = true;
+        hideRootNode = true;
         defaultComponentConfigs = {
             indent.padding = 0;
             icon = {
@@ -39,19 +40,12 @@
         };
         sourceSelector = {
             contentLayout = "start";
-            winbar = true;
+            winbar = false;
+            statusline = true;
             sources = [
                 {
                     source = "filesystem";
                     displayName = " File";
-                }
-                {
-                    source = "buffers";
-                    displayName = "󰈙 Bufs";
-                }
-                {
-                    source = "git_status";
-                    displayName = "󰊢 Git";
                 }
             ];
         };
@@ -59,4 +53,23 @@
             width = 30;
         };
     };
+
+    keymaps = [
+        {
+            action = "<cmd>Neotree toggle<cr>";
+            key = "<leader>e";
+        }
+        {
+            action.__raw = ''
+            function()
+                if vim.bo.filetype == "neo-tree" then
+                vim.cmd.wincmd "p"
+                else
+                vim.cmd.Neotree "focus"
+                end
+            end
+            '';
+            key =  "<leader>o";
+        }
+    ];
 }

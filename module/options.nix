@@ -19,5 +19,7 @@
         shiftwidth = 4; # Number of spaces to use for autoindent
         expandtab = true; # Use spaces instead of tabs
         smarttab = true; # Use shiftwidth when tabbing
+
+        cmdheight = 0; # Height of the command line
     };
 }

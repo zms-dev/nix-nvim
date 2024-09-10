@@ -5,6 +5,14 @@
             transparentBackground = false;
             flavour = "macchiato"; # mocha, macchiato, frappe, latte
             integrations = {
+                alpha = true;
+                barbar = true;
+                barbecue = {
+                    dim_dirname = true;
+                    bold_basename = true;
+                    dim_context = false;
+                    alt_background = false;
+                };
                 cmp = true;
                 gitsigns = true;
                 mini = {
