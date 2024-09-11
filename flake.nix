@@ -21,60 +21,67 @@
     nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, flake-parts, nixvim, nix-github-actions, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-        { flake-parts-lib, ... }:
-        let
-            inherit (flake-parts-lib) importApply;
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-parts,
+    nixvim,
+    nix-github-actions,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} (
+      {flake-parts-lib, ...}: let
+        inherit (flake-parts-lib) importApply;
 
-            flakeModules.default = importApply ./module {
-                inherit flake-parts-lib;
-                inherit (inputs) nixpkgs nixvim;
+        flakeModules.default = importApply ./module {
+          inherit flake-parts-lib;
+          inherit (inputs) nixpkgs nixvim;
+        };
+      in {
+        imports = [
+          flakeModules.default
+          inputs.devshell.flakeModule
+        ];
+
+        systems = import inputs.systems;
+
+        perSystem = {
+          system,
+          pkgs,
+          config,
+          ...
+        }: let
+          nixvimLib = nixvim.lib.${system};
+          nixvim' = nixvim.legacyPackages.${system};
+          nvimConfig = {
+            enableRust = true;
+            enableTypeScript = true;
+            extraConfig = {};
+          };
+          nvimModule = {
+            inherit pkgs;
+
+            extraSpecialArgs = {
+              cfg = nvimConfig;
             };
-        in
-        {
-            imports = [
-                flakeModules.default
-                inputs.devshell.flakeModule
-            ];
 
-            systems = import inputs.systems;
+            module = import ./module/nixvim.nix;
+          };
+        in {
+          nvim = nvimConfig;
+          formatter = pkgs.alejandra;
+          checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nvimModule;
+          packages.default = nixvim'.makeNixvimWithModule nvimModule;
+        };
 
-            perSystem = { system, pkgs, config, ... }:
-                let
-                    nixvimLib = nixvim.lib.${system};
-                    nixvim' = nixvim.legacyPackages.${system};
-                    nvimConfig = {
-                        enableRust = true;
-                        enableTypeScript = true;
-                        extraConfig = {};
-                    };
-                    nvimModule = {
-                        inherit pkgs;
+        flake = {
+          inherit flakeModules;
+          flakeModule = flakeModules.default;
 
-                        extraSpecialArgs = {
-                            cfg = nvimConfig;
-                        };
-
-                        module = import ./module/nixvim.nix;
-                    };
-                in
-                {
-                    nvim = nvimConfig;
-                    formatter = pkgs.alejandra;
-                    checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nvimModule;
-                    packages.default = nixvim'.makeNixvimWithModule nvimModule;
-                };
-
-            flake = {
-                inherit flakeModules;
-                flakeModule = flakeModules.default;
-
-                githubActions = nix-github-actions.lib.mkGithubMatrix {
-                    checks = nixpkgs.lib.getAttrs [ "x86_64-linux" "x86_64-darwin" ] self.checks;
-                };
-            };
-        }
+          githubActions = nix-github-actions.lib.mkGithubMatrix {
+            checks = nixpkgs.lib.getAttrs ["x86_64-linux" "x86_64-darwin"] self.checks;
+          };
+        };
+      }
     );
 }

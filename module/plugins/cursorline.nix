@@ -1,11 +1,11 @@
 {
-    plugins.cursorline = {
-        enable = true;
-        cursorline = {
-            enable = true;
-            number = true;
-            timeout = 250;
-        };
-        cursorword.enable = false;
+  plugins.cursorline = {
+    enable = false;
+    cursorline = {
+      enable = true;
+      number = true;
+      timeout = 250;
     };
+    cursorword.enable = false;
+  };
 }

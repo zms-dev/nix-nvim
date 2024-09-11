@@ -1,6 +1,6 @@
 {
-    plugins.statuscol = {
-        enable = true;
-        settings = {};
-    };
+  plugins.statuscol = {
+    enable = true;
+    settings = {};
+  };
 }

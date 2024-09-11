@@ -1,8 +1,8 @@
 {
-    colorschemes.cyberdream = {
-        enable = true;
-        settings = {
-            transparent = true;
-        };
+  colorschemes.cyberdream = {
+    enable = true;
+    settings = {
+      transparent = true;
     };
+  };
 }

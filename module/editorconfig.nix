@@ -1,5 +1,5 @@
 {
-    editorconfig = {
-        enable = true;
-    };
+  editorconfig = {
+    enable = true;
+  };
 }

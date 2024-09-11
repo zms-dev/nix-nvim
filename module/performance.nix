@@ -1,6 +1,6 @@
 {
-    performance = {
-        byteCompileLua.enable = true;
-        # combinePlugins.enable = true;
-    };
+  performance = {
+    byteCompileLua.enable = true;
+    # combinePlugins.enable = true;
+  };
 }

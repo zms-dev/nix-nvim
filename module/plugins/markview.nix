@@ -1,6 +1,6 @@
 {
-    plugins.markview = {
-        enable = true;
-        settings = {};
-    };
+  plugins.markview = {
+    enable = true;
+    settings = {};
+  };
 }

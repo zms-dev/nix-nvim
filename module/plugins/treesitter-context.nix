@@ -1,5 +1,5 @@
 {
-    plugins.treesitter-context = {
-        enable = false;
-    };
+  plugins.treesitter-context = {
+    enable = false;
+  };
 }

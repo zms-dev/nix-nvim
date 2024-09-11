@@ -1,6 +1,6 @@
 {
-    plugins.typescript-tools = {
-        enable = true;
-        settings = {};
-    };
+  plugins.typescript-tools = {
+    enable = true;
+    settings = {};
+  };
 }

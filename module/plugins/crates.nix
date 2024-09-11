@@ -1,5 +1,5 @@
 {
-    plugins.crates-nvim = {
-        enable = true;
-    };
+  plugins.crates-nvim = {
+    enable = true;
+  };
 }

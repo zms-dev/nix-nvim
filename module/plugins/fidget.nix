@@ -1,10 +1,10 @@
 {
-    plugins.fidget = {
-        enable = true;
-        notification = {
-            window = {
-                winblend = 0;
-            };
-        };
+  plugins.fidget = {
+    enable = true;
+    notification = {
+      window = {
+        winblend = 0;
+      };
     };
+  };
 }

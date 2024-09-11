@@ -1,6 +1,6 @@
-{ cfg, ... }: {
-    imports = [
-        ./catppuccin.nix
-        # ./cyberdream.nix
-    ];
+{cfg, ...}: {
+  imports = [
+    ./catppuccin.nix
+    # ./cyberdream.nix
+  ];
 }

@@ -1,8 +1,8 @@
 {
-    globals = {
-        mapleader = " ";
-        maplocalleader = " ";
-        WebDevIconsUnicodeGlyphDoubleWidth = 1;
-        WebDevIconsNerdTreeAfterGlyphPadding = "  ";
-    };
+  globals = {
+    mapleader = " ";
+    maplocalleader = " ";
+    WebDevIconsUnicodeGlyphDoubleWidth = 1;
+    WebDevIconsNerdTreeAfterGlyphPadding = "  ";
+  };
 }

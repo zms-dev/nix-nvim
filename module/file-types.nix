@@ -1,5 +1,5 @@
 {
-    autoGroups = {
-        filetypes = {};
-    };
+  autoGroups = {
+    filetypes = {};
+  };
 }
