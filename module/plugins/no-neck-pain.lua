@@ -2,7 +2,7 @@ require('no-neck-pain').setup({
     width = 120,
     buffers = {
         colors = {
-            backgroundColor = "catppuccin-mocha-dark",
+            -- backgroundColor = "catppuccin-mocha-dark",
         },
     },
     autocmds = {

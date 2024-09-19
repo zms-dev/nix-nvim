@@ -5,16 +5,16 @@ local mocha = require("catppuccin.palettes").get_palette "mocha"
 local fmt = {
 	ending = {
 		guifg = mocha.crust,
-		guibg = mocha.base,
+		guibg = "none",
 	},
 	inner = {
 		guifg = mocha.text,
 		guibg = mocha.crust,
 	},
-    divider = {
-        guifg = mocha.mantle,
-        guibg = mocha.crust,
-    },
+  divider = {
+      guifg = mocha.mantle,
+      guibg = mocha.crust,
+  },
 }
 
 local START_BLOCK = vim.tbl_extend('force', { '' }, fmt.ending)
@@ -73,7 +73,7 @@ local function get_git_diff(props)
       { filename , gui = vim.bo[props.buf].modified and "bold,italic" or "bold" }
     )
     if not props.focused then
-      label["group"] = "BufferInactive"
+      -- label["group"] = "BufferInactive"
     end
 
     return label

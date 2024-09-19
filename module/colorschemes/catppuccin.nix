@@ -2,7 +2,7 @@
   colorschemes.catppuccin = {
     enable = true;
     settings = {
-      transparentBackground = false;
+      transparent_background = true;
       flavour = "mocha"; # mocha, macchiato, frappe, latte
       integrations = {
         alpha = true;
@@ -55,12 +55,15 @@
           enabled = true;
           lsp = false;
         };
+        indent_blankline = {
+          enable = true;
+          colored_indent_levels = true;
+        };
       };
       styles = {
         booleans = ["bold" "italic"];
         conditionals = ["bold"];
       };
-      term_colors = true;
     };
   };
 }
