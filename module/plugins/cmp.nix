@@ -28,6 +28,10 @@
         }
       ];
       snippet.expand = "luasnip";
+      window = {
+        completion.border = "rounded";
+        documentation.border = "rounded";
+      };
       mapping = {
         "<C-e>" = "cmp.mapping.close()";
         "<CR>" = "cmp.mapping.confirm({ select = true })";
