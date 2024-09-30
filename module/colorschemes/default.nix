@@ -1,6 +1,10 @@
-{cfg, ...}: {
+{cfg, ...}:
+{
   imports = [
     ./catppuccin.nix
-    # ./cyberdream.nix
+    ./cyberdream.nix
+    ./gruvbox.nix
+    ./rose-pine.nix
+    ./tokyonight.nix
   ];
 }

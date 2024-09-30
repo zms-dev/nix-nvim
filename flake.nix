@@ -54,6 +54,8 @@
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nvimConfig = {
+            colorscheme = "tokyonight";
+            transparent = true;
             enableRust = true;
             enableTypeScript = true;
             extraConfig = {};
@@ -77,6 +79,8 @@
         flake = {
           inherit flakeModules;
           flakeModule = flakeModules.default;
+
+          homeManagerModules.nvim = import ./home-manager.nix;
 
           githubActions = nix-github-actions.lib.mkGithubMatrix {
             checks = nixpkgs.lib.getAttrs ["x86_64-linux" "x86_64-darwin"] self.checks;

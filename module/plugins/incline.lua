@@ -1,19 +1,22 @@
 local helpers = require('incline.helpers')
 local devicons = require('nvim-web-devicons')
-local mocha = require("catppuccin.palettes").get_palette "mocha"
+-- local mocha = require("catppuccin.palettes").get_palette "mocha"
 
 local fmt = {
 	ending = {
-		guifg = mocha.crust,
-		guibg = "none",
+		--guifg = mocha.crust,
+		--guibg = "none",
+    hl = "InclineEnd",
 	},
 	inner = {
-		guifg = mocha.text,
-		guibg = mocha.crust,
-	},
+		--guifg = mocha.text,
+		--guibg = mocha.crust,
+    hl = "InclineInner",
+  },
   divider = {
-      guifg = mocha.mantle,
-      guibg = mocha.crust,
+      --guifg = mocha.mantle,
+      --guibg = mocha.crust,
+      hl = "InclineDivider",
   },
 }
 

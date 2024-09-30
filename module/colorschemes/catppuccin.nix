@@ -1,8 +1,9 @@
+{cfg, ...}:
 {
   colorschemes.catppuccin = {
-    enable = true;
+    enable = cfg.colorscheme == "catppuccino";
     settings = {
-      transparent_background = true;
+      transparent_background = cfg.transparent;
       flavour = "mocha"; # mocha, macchiato, frappe, latte
       integrations = {
         alpha = true;
