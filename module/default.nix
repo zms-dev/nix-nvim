@@ -13,6 +13,10 @@ in
     inputs,
     ...
   }: {
+    imports = [
+      ./home-manager.nix
+    ];
+
     options.perSystem = mkPerSystemOption (
       {
         self,

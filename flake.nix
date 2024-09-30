@@ -80,10 +80,6 @@
           inherit flakeModules;
           flakeModule = flakeModules.default;
 
-          homeManagerModules.nvim = importApply ./home-manager.nix {
-            inherit inputs;
-          };
-
           githubActions = nix-github-actions.lib.mkGithubMatrix {
             checks = nixpkgs.lib.getAttrs ["x86_64-linux" "x86_64-darwin"] self.checks;
           };
