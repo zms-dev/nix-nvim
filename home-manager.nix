@@ -18,7 +18,7 @@ in {
       description = "color scheme to use";
     };
     transparent = mkEnableOption "enable transparent background";
-  }
+  };
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
