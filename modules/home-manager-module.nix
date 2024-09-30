@@ -29,7 +29,7 @@
                     cfg = cfg;
                   };
 
-                  module = import ./nixvim.nix;
+                  module = import ./nvim;
                 })
             ];
           })
