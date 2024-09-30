@@ -13,7 +13,7 @@
     }:
       with lib; let
         cfg = config.programs.nvim;
-        nixvim = inputs'.nixvim.legacyPackages.${system};
+        nixvim = inputs.nixvim.legacyPackages.${system};
       in {
         options.programs.nvim = with lib; {
           enable = mkEnableOption "nvim program";
