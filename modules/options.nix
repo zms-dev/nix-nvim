@@ -1,4 +1,5 @@
 { lib, ... } : with lib; {
+  enable = mkEnableOption "nvim program";
   colorscheme = mkOption {
     default = "tokyonight";
     type = types.enum [ 
