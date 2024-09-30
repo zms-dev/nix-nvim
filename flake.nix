@@ -33,13 +33,16 @@
       {flake-parts-lib, ...}: let
         inherit (flake-parts-lib) importApply;
 
-        flakeModules.default = importApply ./module {
+        flakeModules.default = importApply ./modules/flake-module.nix {
           inherit flake-parts-lib;
           inherit (inputs) nixpkgs nixvim;
         };
+
+        homeManagerModules.default = import ./modules/home-manager-module.nix;
       in {
         imports = [
           flakeModules.default
+          homeManagerModules.default
           inputs.devshell.flakeModule
         ];
 
@@ -67,7 +70,7 @@
               cfg = nvimConfig;
             };
 
-            module = import ./module/nixvim.nix;
+            module = import ./modules/nvim;
           };
         in {
           nvim = nvimConfig;

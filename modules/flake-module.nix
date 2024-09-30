@@ -1,11 +1,10 @@
 {
-  flake-parts-lib,
   nixpkgs,
+  flake-parts-lib,
   nixvim,
   ...
 }: let
   inherit (flake-parts-lib) mkPerSystemOption;
-  inherit (nixpkgs.lib) mkEnableOption mkOption types;
 in
   {
     config,
@@ -13,10 +12,6 @@ in
     inputs,
     ...
   }: {
-    imports = [
-      ./home-manager.nix
-    ];
-
     options.perSystem = mkPerSystemOption (
       {
         self,
@@ -34,32 +29,13 @@ in
             inherit cfg;
           };
 
-          module = import ./nixvim.nix;
+          module = import ./nvim;
         };
         nvim = nixvim'.makeNixvimWithModule nvimModule;
       in {
         options = {
-          nvim = {
-            colorscheme = mkOption {
-              default = "tokyonight";
-              type = types.enum [ 
-                "catppuccino"
-                "cyberdream"
-                "gruvbox"
-                "rose-pine"
-                "tokyonight"
-              ];
-              description = "The color scheme to use";
-            };
-            transparent = mkEnableOption "enable transparent background";
-            enableRust = mkEnableOption "enable Rust plugins";
-            enableTypeScript = mkEnableOption "enable TypeScript plugins";
-
-            extraConfig = mkOption {
-              default = {};
-              type = types.attrs;
-              description = "Extra configuration for nixvim";
-            };
+          nvim = import ./options.nix {
+            lib = nixpkgs.lib;
           };
         };
 
