@@ -31,6 +31,9 @@
 
                   module = import ./nvim;
                 })
+              pkgs.codespell
+              pkgs.alejandra
+              pkgs.statix
             ];
           })
         ];
