@@ -2,7 +2,8 @@
   enable = mkEnableOption "nvim program";
   colorscheme = mkOption {
     default = "tokyonight";
-    type = types.enum [ 
+    type = types.enum [
+      "base16"
       "catppuccino"
       "cyberdream"
       "gruvbox"
