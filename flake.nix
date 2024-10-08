@@ -57,7 +57,7 @@
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nvimConfig = {
-            colorscheme = "tokyonight";
+            colorscheme = "catppuccino";
             transparent = true;
             enableRust = true;
             enableTypeScript = true;
