@@ -19,6 +19,13 @@
 
     nix-github-actions.url = "github:nix-community/nix-github-actions";
     nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
+
+    base16.url = "github:SenchoPens/base16.nix";
+
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -54,10 +61,12 @@
           config,
           ...
         }: let
+          base16 = pkgs.callPackage inputs.base16.lib { };
+          scheme = base16.mkSchemeAttrs "${inputs.tt-schemes}/base16/catppuccin-mocha.yaml";
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nvimConfig = {
-            colorscheme = "catppuccino";
+            base16Scheme = scheme;
             transparent = true;
             enableRust = true;
             enableTypeScript = true;

@@ -32,8 +32,8 @@
         lualine_b = [
           {
             __unkeyed-1 = "branch";
-            separator.left = "";
-            separator.right = "";
+            separator.left = "";
+            separator.right = "";
             padding.right = 2;
             padding.left = 2;
           }
@@ -85,8 +85,8 @@
         lualine_y = [
           {
             __unkeyed-1 = "progress";
-            separator.left = "";
-            separator.right = "";
+            separator.left = "";
+            separator.right = "";
             padding.right = 2;
             padding.left = 2;
           }

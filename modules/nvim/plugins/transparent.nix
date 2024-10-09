@@ -1,11 +1,25 @@
-{ cfg, ... } : {
+{ cfg, lib, ... } : {
   plugins.transparent = {
-    enable = cfg.colorscheme == "base16" && cfg.transparent;
+    enable = cfg.transparent;
     settings = {
+      extra_groups = [
+        "Constant"
+        "NormalFloat"
+        "FloatBorder"
+        "EndOfBuffer"
+        "Title"
+        "WarningMsg"
+      ];
       exclude_groups = [
         "CursorLine"
-        "CursorLineNr"
+        "CursorLineNR"
+        "CursorLineSign"
+        "CursorLineFold"
+        "NeoTreeCursorLine"
+        "StatusLine"
       ];
     };
   };
+
+  extraConfigLua = lib.mkIf cfg.transparent (builtins.readFile ./transparent.lua);
 }

@@ -1,16 +1,9 @@
 { lib, ... } : with lib; {
   enable = mkEnableOption "nvim program";
-  colorscheme = mkOption {
-    default = "tokyonight";
-    type = types.enum [
-      "base16"
-      "catppuccino"
-      "cyberdream"
-      "gruvbox"
-      "rose-pine"
-      "tokyonight"
-    ];
-    description = "The color scheme to use";
+  base16Scheme = mkOption {
+    default = {};
+    type = types.attrs;
+    description = "The base16 scheme to use";
   };
   transparent = mkEnableOption "enable transparent background";
   enableRust = mkEnableOption "enable Rust plugins";
