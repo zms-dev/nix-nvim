@@ -42,6 +42,7 @@
       ./telescope.nix
       ./todo-comments.nix
       ./toggleterm.nix
+      ./transparent.nix
       ./treesitter-context-commentstring.nix
       ./treesitter-context.nix
       ./treesitter.nix
