@@ -38,7 +38,7 @@
         enable = true;
       };
 
-      nil-ls = {
+      nil_ls = {
         enable = true;
         settings = {
           nix.flake.autoArchive = true;

@@ -6,11 +6,11 @@
       autoClose = true;
       autoPreview = true;
       useDiagnosticSigns = true;
-      mode = "workspace_diagnostics";
-      position = "bottom"; # “bottom”, “top”, “left”, “right”
-      win_config = { border = "single"; };
+      # mode = "workspace_diagnostics";
+      # position = "bottom"; # “bottom”, “top”, “left”, “right”
+      win = { border = "single"; };
 
-      action_keys = {
+      keys = {
         close = "q";
         cancel = "<esc>";
         refresh = "r";
