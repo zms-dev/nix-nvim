@@ -21,6 +21,7 @@
       ./illuminate.nix
       ./incline.nix
       ./indent-blankline.nix
+      ./lazygit.nix
       ./leap.nix
       ./lightbulb.nix
       ./lint.nix
